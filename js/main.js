@@ -1,5 +1,11 @@
 $(function (){
   var map = L.map('map').setView([-0.4897352768929488,36.98878027211687],12);
+  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+	attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+	maxZoom: 18,
+	id: 'mapbox.streets',
+	accessToken: 'pk.eyJ1IjoiZGF1ZGk5NyIsImEiOiJjanJtY3B1bjYwZ3F2NGFvOXZ1a29iMmp6In0.9ZdvuGInodgDk7cv-KlujA'
+}).addTo(map);
 
   function onEachFeature(feature,layer){
     var popupString = "<div class='popup-title bg-danger'><h6 class='text-center'>"+feature.properties.F_NAME+"</h6></div><div class='row'> <div class='col-md-6'>"
