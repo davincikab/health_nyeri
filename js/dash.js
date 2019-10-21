@@ -7,7 +7,7 @@ $(function(){
     id: 'mapbox.streets',
     accessToken: 'pk.eyJ1IjoiZGF1ZGk5NyIsImEiOiJjanJtY3B1bjYwZ3F2NGFvOXZ1a29iMmp6In0.9ZdvuGInodgDk7cv-KlujA'
   }).addTo(map);
-  
+
     var data_pnt;
     var const_data;
     // var data_out = [];
@@ -77,7 +77,9 @@ $(function(){
 
     function updateMap(data_out){
       map.eachLayer(layer=>{
-        map.removeLayer(layer);
+        if (layer instanceof L.LayerGroup) {
+          map.removeLayer(layer);
+        }
       });
       // autoscale depending on the values
       function scale(){
