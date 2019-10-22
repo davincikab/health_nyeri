@@ -125,7 +125,7 @@ $(function(){
           fillColor:setColor(feature.properties.const_nam),
           color:'black',
           weight:0.5,
-          opacity:1,
+          fillOpacity:0.6,
         }
       }
 

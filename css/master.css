@@ -86,7 +86,7 @@ button{
   overflow-y:auto;
   overflow-x:hidden;
   padding: 1%;
-  width:auto;
+  width:25%;
 }
 
 .btn{
@@ -151,4 +151,14 @@ button{
 /* }  */
 .leaflet-routing-container{
   display: none;
+}
+
+.col-6 {width: 50%;}
+/* MEDIA QUERIES */
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    #analysis{
+      width: 250px;
+      padding: 15px;
+    }
 }

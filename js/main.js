@@ -8,9 +8,9 @@ $(function (){
 }).addTo(map);
 
   function onEachFeature(feature,layer){
-    var popupString = "<div class='popup-title bg-danger'><h6 class='text-center'>"+feature.properties.F_NAME+"</h6></div><div class='row'> <div class='col-md-6'>"
+    var popupString = "<div class='popup-title bg-danger'><h6 class='text-center'>"+feature.properties.F_NAME+"</h6></div><div class='row'> <div class='col-md-6 col-6'>"
             +" <p>Agency</p><p>District</p><p>Location</p><p>Sub Location</p></div>"
-            +"<div class='col-md-6'><p>"
+            +"<div class='col-md-6 col-6'><p>"
             + feature.properties.AGENCY+"</p><p>"
             + feature.properties.DIST+"</p><p>"
             + feature.properties.LOCATION+"</p><p>"
@@ -62,31 +62,23 @@ $(function (){
 
     form_control.onAdd = function(map){
       var div = L.DomUtil.create('div','analysis-tab');
-
       let btn = L.DomUtil.create('button','btn btn-sm bt-tog');
       btn.innerHTML += "F";
 
       div.appendChild(btn);
 
-      let content = L.DomUtil.create('div', 'content col-md-12');
-      let dt = document.getElementById('analysis');
-      // content.appendChild(dt);
-      div.appendChild(content);
-      // console.log(dt);
-      // content.innerHTML += dt.textContent
       btn.addEventListener('click', function(e){
           e.preventDefault();
          let tab =   $('.analysis').css('display');
 
           if (tab == "none") {
             // responsive: for mobile device: look at modals
-            $('.leaflet-control.leaflet-control-layers, .analysis-tab').css({"right":"26vw"});
+            $('.leaflet-control-layers, .analysis-tab').css({"right":"26vw"});
             $('.analysis').show();
-
           }
           else{
             $('.analysis').hide();
-            $('.leaflet-control.leaflet-control-layers, .analysis-tab').css({"right":"0"});
+            $('.leaflet-control,.leaflet-control-layers, .analysis-tab').css({"right":"0"});
           }
 
         e.stopPropagation();
@@ -199,22 +191,15 @@ $(function (){
         }).addTo(map);
 
         map.fitBounds(layer_selected.getBounds());
-      // console.log(feature_intersect);
     }
-
 
 
     function search_nearest(current_location){
       // check the features that intersect with the buffer
       console.log(current_location);
       let pnts = hospital_data.toGeoJSON().features.map(k => [k.properties.LONG,k.properties.LAT]);
-
-      // var interpolate = turf.interpolate(turf.points(pnts), 30, {units:'metres',property:'',gridType:'square'});
-
-      // console.log(interpolate);
       let nearest = turf.nearestPoint(turf.point(current_location), turf.points(pnts));
 
-      console.log(nearest);
       let closest_facility = L.geoJSON(nearest,{
           style:function(feature){
             return {
@@ -231,5 +216,4 @@ $(function (){
         map.setView(nearest.geometry.coordinates.reverse());
     }
 
-    map.on('click', (e) => console.log(e));
 });
